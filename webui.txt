@@ -1,4 +1,13 @@
 
+index
+	une section intro, une page avec un petit coucou avec mon nom et quelques infos,
+links
+	mon github, inspirations et txt pour dire rejoignez moi pour savoir plus
+review
+	des restos, des trucs comme sa, mais j'ai envie que mon site reste 100% static, et pas trop de changements au niveau de https
+
+
+
 3 carres 1 pour ctf (a droite), un pour pc wizard (a gauche) et un pour le main website (au milieu)
 
 scroll nous mene a des informations que je connais et des ideologies que je pense pertinantes.
@@ -12,4 +21,17 @@ ref:
 https://tailwindui.com/
 https://uizard.io/templates/website-templates/
 
+de plus:
+
+http://bettermotherfuckingwebsite.com/
+motherfuckingwebsite.com
+https://evenbettermotherfucking.website/
+https://perfectmotherfuckingwebsite.com/
+https://thebestmotherfuckingwebsite.co/
+https://thebestmotherfucking.website/
+https://txti.es/
+
+licenses:
+
+https://creativecommons.org/publicdomain/zero/1.0/
 
