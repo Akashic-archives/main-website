@@ -5,7 +5,8 @@ links
 	mon github, inspirations et txt pour dire rejoignez moi pour savoir plus
 review
 	des restos, des trucs comme sa, mais j'ai envie que mon site reste 100% static, et pas trop de changements au niveau de https
-
+curiculum-vitae
+	mes competitions, les places ou j'ai travaille, ainsi de suite, mes etudes
 
 
 3 carres 1 pour ctf (a droite), un pour pc wizard (a gauche) et un pour le main website (au milieu)
