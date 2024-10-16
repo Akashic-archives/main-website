@@ -2,11 +2,12 @@
 index
 	une section intro, une page avec un petit coucou avec mon nom et quelques infos,
 links
-	mon github, inspirations et txt pour dire rejoignez moi pour savoir plus
+	mon github, inspirations et txt pour dire rejoignez moi pour savoir plus (un petit cote donation genre xmr ou btc)
 review
 	des restos, des trucs comme sa, mais j'ai envie que mon site reste 100% static, et pas trop de changements au niveau de https
 curiculum-vitae
 	mes competitions, les places ou j'ai travaille, ainsi de suite, mes etudes
+
 
 
 3 carres 1 pour ctf (a droite), un pour pc wizard (a gauche) et un pour le main website (au milieu)
@@ -19,6 +20,7 @@ et je me presente (c'est un site web pour me valoriser et pour que je me fasse r
 
 ref:
 
+figma.com
 https://tailwindui.com/
 https://uizard.io/templates/website-templates/
 
