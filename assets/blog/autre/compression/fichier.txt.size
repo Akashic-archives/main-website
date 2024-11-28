@@ -1,0 +1,15 @@
+total 14705020
+drwxr-xr-x 2 momo momo       4096 Nov 26 13:57 .
+drwxr-xr-x 8 momo momo       4096 Nov 26 10:57 ..
+-rw-r--r-- 1 momo momo 3145728000 Nov 26 11:06 fichier-random.txt
+-rw-r--r-- 1 momo momo 3146238473 Nov 26 11:08 fichier-random.txt.tar.gz
+-rw-r--r-- 1 momo momo 3147544928 Nov 26 11:58 fichier-random.txt.zpaq
+-rw-r--r-- 1 momo momo 3339292672 Nov 25 19:05 fichier.txt
+-rw-r--r-- 1 momo momo          0 Nov 26 13:57 fichier.txt.size
+-rw-r--r-- 1 momo momo    3240802 Nov 25 19:06 fichier.txt.tar.gz
+-rw-r--r-- 1 momo momo        351 Nov 26 13:56 fichier.txt.time
+-rw-r--r-- 1 momo momo       1099 Nov 26 11:02 fichier.txt.zpaq
+-rw-r--r-- 1 momo momo 2042753003 Nov 26 12:00 log.log
+-rw-r--r-- 1 momo momo  158772917 Nov 26 13:31 log.log.tar.gz
+-rw-r--r-- 1 momo momo   74310492 Nov 26 13:53 log.log.zpaq
+-rw-r--r-- 1 momo momo       3475 Nov 26 11:17 py.py

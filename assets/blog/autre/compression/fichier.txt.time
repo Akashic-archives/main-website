@@ -1,0 +1,37 @@
+fichier vide
+
+tar gz
+real	0m16.141s
+user	0m15.963s
+sys	0m2.245s
+
+zpaq
+real	0m16.624s
+user	0m16.090s
+sys	0m0.532s
+
+
+fichier random
+
+tar gz
+real	1m23.722s
+user	1m22.019s
+sys	0m4.553s
+
+zpaq
+real	48m17.939s
+user	281m24.558s
+sys	0m52.635s
+
+fichier log
+
+tar gz
+real	0m24.908s
+user	0m24.645s
+sys	0m2.749s
+
+zpaq
+real	20m2.780s
+user	112m39.028s
+sys	0m26.191s
+
