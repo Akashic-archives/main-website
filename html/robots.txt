@@ -4,3 +4,4 @@ Disallow: curriculum-vitae.html
 Disallow: robots.txt
 Disallow: style.css
 Disallow: blog/
+Disallow: assets/

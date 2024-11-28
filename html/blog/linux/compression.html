@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>M'hamed</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="../../style.css">
+	</head>
+<body>
+	<h1>Blog - Linux - Compression</h1>
+
+	<div>
+	
+	<h2>Compression</h2>
+
+	<p>Je suis tombe sur un article pendant que je jouais dans les logs de mon site web, disant que on peut compresser avec paq. c'est bien apparament et c'est super long. je me suis dit que je vais essayer. j'ai genere des logs, et a un moment donne, j'ai decider de prendre des fichier de pres de 1 Gb, et d'essayer tar et gz ainsi que zpaq. je sais que c'est inutile de faire tar sur un fichier, mais bon.</p>
+	<p>j'ai d'abord cree un fichier de 3,145,728,000. c'est gros, je sais. il est remplis de random char. donc dd if=/dev/urandom of=random. pour les tailles d'abord, tar et gz donnent 3,146,238,473 donc une taille plus grande. pour zpaq, 3,147,544,928 encore plus gros. decidement, les algorithmes de compression n'aiment pas les donnees random. pour le temps, tar et gz, la commande time m'a donne</p>
+	<p>
+real	1m23.722s
+user	1m22.019s
+sys	0m4.553s
+	</p>
+	<p>
+et pour zpaq,
+real	48m17.939s
+user	281m24.558s
+sys	0m52.635s
+	</p>
+	<p>
+donc beaucoup plus de temps. c'est mieux tar dans ce cas la, ou meme mieux, juste le fichier.
+	</p>
+	<p>
+ensuite, un fichier remplis de zero de /dev/zero. le fichier fait 3,339,292,672 et le tar et gz m'a donne 3,240,802 ce qui est 3 ordres de grandeur plus petit. le zpaq fait 1,099 ce qui est ridiculement petit. pres de 6 ordres de grandeur plus petit. pour le temps, c'est presque le meme avec tar qui me prend
+	</p>
+	<p>
+	</p>
+	<p>
+	</p>
+	<p>
+	</p>
+	<p>Sources: https://www.mattmahoney.net/dc/zpaq.html</p>
+
+	</div>
+
+</body>
+</html>
+
+
+real	0m16.141s
+user	0m15.963s
+sys	0m2.245s
+et zpaq qui me prend
+real	0m16.624s
+user	0m16.090s
+sys	0m0.532s
+donc zpaq est clairement superieur pour des fichiers avec un seul character.
+j'ai ensuite genere des logs avec ce fichier (link) qui fait 2,042,753,003 et le tar et gz l'a decendu a 158,772,917 et le zpaq l'a decendu a 74,310,492 ce qui est beaucoup mieux. pour le temps, tar et gz me donne
+real	0m24.908s
+user	0m24.645s
+sys	0m2.749s
+et zpaq me prend
+real	20m2.780s
+user	112m39.028s
+sys	0m26.191s
+donc beaucoup plus de temps, mais si le temps n'est pas une contrainte, allez avec zpaq, sinon, tar et gz font une assez bonne job, pas la meilleur, mais une bonne.
+
+
+
