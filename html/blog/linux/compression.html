@@ -26,6 +26,21 @@
 	<p>J'ai ensuite généré des logs avec ce fichier (<a href="/assets/blog/linux/compression/py.py">py.py</a>) qui fait 2,042,753,003, le tar.gz me l'a descendu a 158,772,917 et le zpaq l'a descendu a 74,310,492 ce qui est beaucoup mieux. Pour le temps, tar.gz me donne 24.908s et zpaq me prend 20m2.780s. Beaucoup plus de temps, mais si le temps n'est pas une contrainte, allez avec zpaq. Si ce l'est, tar.gz fait un assez bon travail.
 	</p>
 	<br />
+	<p>TLDR: zpaq est vraiment fort, des ordres de grandeur, mais est aussi lent, des ordres de grandeur si on le compare à gzip.
+	</p>
+	<br />
+	<p>Fichier random:	3.145 Gb</p>
+	<p>tar.gz		3.146 Gb, 48 min</p>
+	<p>zpaq			3.147 Gb, 1 min 23</p>
+	<br />
+	<p>Fichier vide:	3.3 Gb</p>
+	<p>tar.gz		3.2 Mb, 16s</p>
+	<p>zpaq			1 Kb, 16s</p>
+	<br />
+	<p>Fichier log:		2 Gb</p>
+	<p>tar.gz		158 Mb, 24s</p>
+	<p>zpaq			74 Mb, 20 min</p>
+	<br />
 	<p><small><a href="/assets/blog/linux/compression/fichier-size.txt">Ficher de taille</a></small></p>
 	<p><small><a href="/assets/blog/linux/compression/fichier-time.txt">Fichier de temps</a></small></p>
 	<p><small><a href="/assets/blog/linux/compression/py.py">Script pour les logs</a></small></p>
