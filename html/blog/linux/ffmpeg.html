@@ -15,9 +15,28 @@
 	<h2>ffmpeg</h2>
 
 	<br />
-	<p>ffmpeg est un outil que j'utilise pour réduire la taille des vidéos que j'ai, et pour les rendre visionnables sur mon ordi. Mon téléphone prend des vidéos qui peuvent aller jusqu'à 500 Mb par minutes et mon ordi a de la difficulté à les montrer. La commence que j'utilise est ffmpeg -i video.mp4 video.mp4. C'est pas mal, ça fait une conversion de base, mais<p>
+	<p>ffmpeg est un outil que j'utilise pour réduire la taille des vidéos que j'ai, et pour les rendre visionnables sur mon ordi. Mon téléphone prend des vidéos qui peuvent aller jusqu'à 500 Mb par minutes, voir plus, et mon ordi a de la difficulté à les montrer.</p>
 	<br />
-	<p><small><a href="/assets/blog/linux/ffmpeg/fichier-size.txt">Ficher de taille</a></small></p>
+	<p>La commande que j'utilise le plus souvent est ffmpeg -i input.mp4 output.mp4. C'est pas mal, ça fait une conversion de base, mais c'est pas fini. Si on veut extraire l'audio, ffmpeg -i input.mp4 output.mp3. ffmpeg devine l'output grâce à l'extension qu'on met.<p>
+	<br />
+	<p>Je vois aussi passer de temps en temps des vidéos qui sont ridiculement grandes, comme un ensemble de vidéos qu'on va nommer série-1 et série-2. Je n'ai pas l'original, mais on va faire genre que oui. Si je fais ffprobe sur la première et la dernière vidéo de la série 1, je trouve que ça utilise les codecs h264 et aac donc 1489 kb/s et 63 kb/s respectivement. La dernière vidéo utilise encore h264 à 1489 kb/s et aac à 192 kb/s. La qualité audio à augmenté, mais la vidéo reste la même. Au total, 92.2 Gb pour la série-1</p>
+	<br />
+	<p>J'ai réencodé la série-1 et pour la première vidéo, en h265, qui est plus connue sous le nom de HEVC, à 553 kb/s et l'audio est rester le même avec du aac mais 129 kb/s. La qualité peut avoir l'aire d'augmenter, mais on ne peut pas créer des données avec rien, donc ça consomme juste plus de mémoire. La dernière vidéo est rendue à 438 kb/s et 129 kb/s. La vidéo consomme encore une fois beaucoup moins de place, et l'audio un peu plus.</p>
+	<br />
+	<p>La série-2 utilise h264 à 3778 kb/s et ac3 à 384 kb/s pour la première vidéo et h264 à 3777 kb/s et ac3 à 384 kb/s pour la dernière. après l'avoir réencodé, h265 à 722 kb/s et aac à 394 kb/s.</p>
+	<br /> 170.4
+	<p>La taille totale de la série-1 avant réencodage est de 92.2 Gb, et après est de 35.5 Gb, près du tier de la place. Pour la série-2, on passe de 170.4 Gb à 39 Gb. Vu que, pour l'instant, mon setup ne me le permet pas, je vais utiliser la série-1 réencodée jusqu'à avoir suffisament de ssd pour pouvoir l'effacer et retourner plus proche de l'origine. Ça à pris plus d'une semaine pour convertir le tout, sur mon laptop et mon desktop.</p>
+	<br />
+	<br />
+	<p>J'ai aussi une vidéo prise le 2024 07 20 à 22:29:18, plus pour la retrouver que pour vous, qui dure près de 37 secondes. Elle utilise h265 à 144225 kb/s et aac à 256 kb/s, la résolution est de 3840x2160 à 60 fps, ce qui est ridicule, courtoisie de samsung S23 FE, possible d'aller plus haut mais je me retiens. ffmpeg -i vidéo.mp4 output.mp4 à un speed de 0.13 en moyenne, prend 4 min 46 secondes, pour une vidéo de 37 secondes. c'est ridiculement lent, ça fait passer la vidéo de 623 Mb à 375 Mb, j'ai même utilisé une commande pour la réduire à 1080p et ça donne 83 Mb. ffmpeg encode de base en h264 donc la output.mp4 est h264 à 86820 kb/s et l'audio est aac à 129 kb/s.</p>
+	<br />
+	<br />
+	<p>Les commandes que j'utilise le plus sont:</p>
+	<p>ffmpeg -i input.mp4 -vf "scale=trunc(iw/4)*2:trunc(ih/4)*2" -c:v libx265 -crf 28 -pix_fmt yuv420p half_the_frame_size.mp4</p>
+	<p>ffmpeg -i input.mp4 -vf scale=1920:1080 1080p.mp4</p>
+	<p>ffmpeg -v quiet -stats</p>
+	<p>ffmpeg -i input -c:v libx265 -c:a copy output.mp4</p>
+	<br />
 	<p><small><a href="/assets/blog/linux/ffmpeg/fichier-time.txt">Fichier de temps</a></small></p>
 	<p>Sources: <a href=""></a></p>
 	<br />
