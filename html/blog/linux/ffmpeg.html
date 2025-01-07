@@ -24,7 +24,7 @@
 	<p>J'ai réencodé la série-1 et pour la première vidéo, en h265, qui est plus connue sous le nom de HEVC, à 553 kb/s et l'audio est rester le même avec du aac mais 129 kb/s. La qualité peut avoir l'aire d'augmenter, mais on ne peut pas créer des données avec rien, donc ça consomme juste plus de mémoire. La dernière vidéo est rendue à 438 kb/s et 129 kb/s. La vidéo consomme encore une fois beaucoup moins de place, et l'audio un peu plus.</p>
 	<br />
 	<p>La série-2 utilise h264 à 3778 kb/s et ac3 à 384 kb/s pour la première vidéo et h264 à 3777 kb/s et ac3 à 384 kb/s pour la dernière. après l'avoir réencodé, h265 à 722 kb/s et aac à 394 kb/s.</p>
-	<br /> 170.4
+	<br />
 	<p>La taille totale de la série-1 avant réencodage est de 92.2 Gb, et après est de 35.5 Gb, près du tier de la place. Pour la série-2, on passe de 170.4 Gb à 39 Gb. Vu que, pour l'instant, mon setup ne me le permet pas, je vais utiliser la série-1 réencodée jusqu'à avoir suffisament de ssd pour pouvoir l'effacer et retourner plus proche de l'origine. Ça à pris plus d'une semaine pour convertir le tout, sur mon laptop et mon desktop.</p>
 	<br />
 	<br />
@@ -37,11 +37,7 @@
 	<p>ffmpeg -v quiet -stats</p>
 	<p>ffmpeg -i input -c:v libx265 -c:a copy output.mp4</p>
 	<br />
-	<p><small><a href="/assets/blog/linux/ffmpeg/fichier-time.txt">Fichier de temps</a></small></p>
-	<p>Sources: <a href=""></a></p>
-	<br />
-	<p>2024</p>
-
+	<p>6 Jan 2024</p>
 	</div>
 
 </body>
