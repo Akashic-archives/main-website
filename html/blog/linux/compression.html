@@ -14,38 +14,38 @@
 	
 	<h2>Compression</h2>
 
-	<br />
+	<br>
 	<p>Je suis tombé sur un article pendant que je jouais dans les logs de mon site web, disant qu'on peut compresser avec paq. C'est bien, apparement, et c'est super long. Je me suis dit que je vais essayer. J'ai généré des logs, et à un moment donné, j'ai décidé de prendre des fichier de près de 1 Gb, et d'essayer tar.gz ainsi que zpaq. Je sais que c'est inutile de faire tar sur un seul fichier, mais bon.</p>
-	<br />
+	<br>
 	<p>J'ai d'abord créé un fichier de 3,145,728,000. C'est gros, je sais. Il est remplis de caractères random. Donc dd if=/dev/urandom of=random. Pour les tailles d'abord, tar.gz donnent 3,146,238,473 donc une taille plus grande que le fichier original. Pour zpaq, 3,147,544,928, ce qui est encore plus grand que le tar.gz. Décidément, les algorithmes de compression n'aiment pas les données random. Pour le temps de tar.gz, la commande time m'a donne 1m23.722s et pour zpaq, 48m17.939s. Zpaq prend beaucoup plus de temps que tar.gz pour un résultat moins bon. Dans ce cas là, juste le fichier est bien meilleur que n'importe quel compression.
 	</p>
-	<br />
+	<br>
 	<p>Ensuite, un fichier remplis de zero de /dev/zero. Le fichier fait 3,339,292,672 et le tar.gz m'a donné 3,240,802, ce qui est 3 ordres de grandeur plus petit. Le zpaq fait 1,099 ce qui est ridiculement petit. Près de 6 ordres de grandeur plus petit. Pour le temps, c'est presque le même avec tar.gz qui me prend 16.141s et zpaq qui me prend 16.624s. Zpaq est clairement supérieur pour des fichiers avec un seul caractère.
 	</p>
-	<br />
+	<br>
 	<p>J'ai ensuite généré des logs avec ce fichier (<a href="/assets/blog/linux/compression/py.py">py.py</a>) qui fait 2,042,753,003, le tar.gz me l'a descendu a 158,772,917 et le zpaq l'a descendu a 74,310,492 ce qui est beaucoup mieux. Pour le temps, tar.gz me donne 24.908s et zpaq me prend 20m2.780s. Beaucoup plus de temps, mais si le temps n'est pas une contrainte, allez avec zpaq. Si ce l'est, tar.gz fait un assez bon travail.
 	</p>
-	<br />
+	<br>
 	<p>TLDR: zpaq est vraiment fort, des ordres de grandeur, mais est aussi lent, des ordres de grandeur si on le compare à gzip.
 	</p>
-	<br />
+	<br>
 	<p>Fichier random:	3.145 Gb</p>
 	<p>tar.gz		3.146 Gb, 48 min</p>
 	<p>zpaq			3.147 Gb, 1 min 23</p>
-	<br />
+	<br>
 	<p>Fichier vide:	3.3 Gb</p>
 	<p>tar.gz		3.2 Mb, 16s</p>
 	<p>zpaq			1 Kb, 16s</p>
-	<br />
+	<br>
 	<p>Fichier log:		2 Gb</p>
 	<p>tar.gz		158 Mb, 24s</p>
 	<p>zpaq			74 Mb, 20 min</p>
-	<br />
+	<br>
 	<p><small><a href="/assets/blog/linux/compression/fichier-size.txt">Ficher de taille</a></small></p>
 	<p><small><a href="/assets/blog/linux/compression/fichier-time.txt">Fichier de temps</a></small></p>
 	<p><small><a href="/assets/blog/linux/compression/py.py">Script pour les logs</a></small></p>
 	<p>Sources: <a href="https://www.mattmahoney.net/dc/zpaq.html">https://www.mattmahoney.net/dc/zpaq.html</a></p>
-	<br />
+	<br>
 	<p>27 Nov 2024</p>
 
 	</div>
