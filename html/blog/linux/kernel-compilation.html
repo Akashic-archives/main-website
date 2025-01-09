@@ -15,12 +15,13 @@
 	<h2>kernel compilation</h2>
 
 	<br>
-	<p>J'ai compil</p>
+	<p>J'ai compilé le kernel linux, plusieurs fois. C'est rien d'exeptionnel, je ne l'ai pas codé, juste compilé. Je ne l'ai même pas customisé, juste compilé. Je risque de le customiser quand je vais avoir un laptop de plus pour ne pas être pris sans rien, incapable de travailler.</p>
 	<br>
+	<p>Pour le compiler, c'est simple, utiliser wget ou juste appuyer sur le bouton pour download sur kernel.org Pour janvier 2025, c'est https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.8.tar.xz Une fois téléchargé, sudo apt install git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison make menuconfig Pour untar le fichier, tar -xvf linux* puis, make menuconfig pour pouvoir créer un .config, sinon vous pouvez le cp de /boot/config</p>
 	<br>
-	<p><small><a href="txt">Ficher</a></small></p>
-	<p>Source: <small><a href=""></a></small></p>
-	<p>2025</p>
+	<p>La partie longue, make -j $cores C'est long, beaucoup trop long, dans mon expériance, c'est proche de 40 minutes si c'est le .config du system. ccache peut permettre d'accélérer le processus pour atteindre 16 secondes. C'est vraiment bien pour beaucoup de tests avec le kernel. make mrproper permet de ne pas avoir à effacer tout et réinstaller le tar pour pouvoir travailler.</p>
+	<br>
+	<p>8 Jan 2025</p>
 	</div>
 
 </body>
