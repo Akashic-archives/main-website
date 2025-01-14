@@ -1,10 +1,7 @@
 
-html {background: #dddddd;}<! -- #000025 ou #252525 color-scheme: light dark -->
-head {
-	title:"M'hamed";
-}
+html {background: #dddddd;}	/* #000025 ou #252525 color-scheme: light dark */
 body {
-	color: #252525;<! -- #90ffff ou #dddddd -->
+	color: #252525;		/* #90ffff ou #dddddd */
 	width: 100vw;
 	height: 100vh;
 }
@@ -12,9 +9,9 @@ body > div {
 	max-width: 28em;
 	margin: auto;
 }
-h1 {text-align: center;} <! -- font-size: 7vh 16px --> 
+h1 {text-align: center;}	/* font-size: 7vh 16px */ 
 h2 {margin-bottom: 0;}
-ul {margin-top: 0.5rem; style="list-style-type:disc"}
+ul {margin-top: 0.5rem; list-style-type:disc}
 a {text-decoration: none;}
 p {margin: 0;}
 
