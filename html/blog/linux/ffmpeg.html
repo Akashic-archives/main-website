@@ -34,6 +34,7 @@
 	<p>ffmpeg -i input.mp4 -vf scale=1920:1080 1080p.mp4</p>
 	<p>ffmpeg -v quiet -stats</p>
 	<p>ffmpeg -i input -c:v libx265 -c:a copy output.mp4</p>
+	<p>parallel 'ffmpeg -v 0 -i "{}" "{.}.mp3"' ::: $(find -type f -name '*.mp4')</p>
 	<br>
 	<p>6 Jan 2025</p>
 	</div>
