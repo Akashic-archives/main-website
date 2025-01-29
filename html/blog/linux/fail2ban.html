@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>M'hamed</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="/style.css">
+		<link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+<body>
+	<h1>Blog - Linux - fail2ban</h1>
+
+	<div>
+	
+	<h2>fail2ban</h2>
+
+	<br>
+	<p>J'ai entendu parler un jour d'un protocol, ssh. C'est merveilleux, je peux utiliser mon ordi à distance, pas besoin d'être là-bas. C'est vraiment bien, mais si quelqu'un peut juste deviner le mot de passe, ou le brute-force, vu que mes serveurs sont allumés et connectés à internet 24/7, mon mot de passe à beau être long, il reste qu'il y a un risque (<a href="https://xkcd.com/936/">xkcd Password Strength</a>). J'utilise des clés, mais je laisse la connection par mot de passe ouverte si jamais je n'ai pas accès à un de mes appareils et que j'ai besoin.</p>
+	<br>
+	<p>Ici vient fail2ban. Un package installable avec apt, qui a la possibilité de ban une addresse ip si elle essaie trop de fois un mot de passe incorrect, pour une durée de temps. Customisable, au bout de 5 tentatives, l'addresse ip est ban pour 10 minutes, et on a la possibilité d'incrémenter ce temps à chaque fois, comme 1h, 2h, 4h, 8h et ainsi de suite.</p>
+	<br>
+	<p>Il y a un problème, il faut un peu de configuration pour que ça fonctionne, trois fois rien, mais c'est chiant pour moi. Voici les commandes, et en bas un guide de DigitalOcean qui est plus exaustif que moi.</p>
+	<br>
+	<p>sudo apt update; sudo apt install fail2ban; sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local; sudo vim /etc/fail2ban/jail.local # pour la customisation</p>
+	<br>
+	<p>Comme je ne lis pas les tutoriels, j'ai eu un problème, et un certain commentaire github (lien en bas) m'a donné cette commande:</p>
+	<p>echo -e "[sshd]\nbackend=systemd\nenabled=true" | sudo tee /etc/fail2ban/jail.local</p>
+	<br>
+	<p>Pour vérifier si il fonctionne, sudo systemctl status fail2ban.service</p>
+	<br>
+	<p>Pour vérifier les addresses ip qui ont été ban, et c'est rapide qu'il y en ai: sudo fail2ban-client status sshd</p>
+	<br>
+	<br>
+	<p>Sources: <a href="https://www.digitalocean.com/community/tutorials/how-fail2ban-works-to-protect-services-on-a-linux-server">Digital ocean fail2ban tutorial</a></p>
+	<p><a href="https://github.com/fail2ban/fail2ban/issues/3292#issuecomment-1142503461">https://github.com/fail2ban/fail2ban/issues/3292#issuecomment-1142503461</a></p>
+	<br>
+	<p>27 Nov 2024</p>
+
+	</div>
+
+</body>
+</html>
+
