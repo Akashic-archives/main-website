@@ -6,8 +6,10 @@ body {
 	height: 100vh;
 }
 div {
-	max-width: 28em;
+	/* max-width: 28em; */
 	margin: auto;
+	width: 100vw;
+	word-wrap: break-word;
 }
 h1 {text-align: center;}	/* font-size: 7vh 16px */ 
 h2 {margin-bottom: 0;}
