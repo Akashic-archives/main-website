@@ -4,16 +4,23 @@ body {
 	color: #252525;		/* #90ffff ou #dddddd */
 	width: 100vw;
 	height: 100vh;
+	justify-content: center;
+	align-items: center;
 }
 div {
 	/* max-width: 28em; */
 	margin: auto;
-	width: 100vw;
+	width: 80vw;
 	word-wrap: break-word;
 }
 h1 {text-align: center;}	/* font-size: 7vh 16px */ 
 h2 {margin-bottom: 0;}
-ul {margin-top: 0.5rem; list-style-type:disc}
+ul {
+	margin-top: 0.5rem;
+	list-style-type:disc;
+	text-align: justify;
+}
 a {text-decoration: none;}
-p {margin: 0;}
-
+p {
+	margin: 0;
+}
