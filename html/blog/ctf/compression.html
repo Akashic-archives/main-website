@@ -26,40 +26,34 @@
 	</p>
 	<p>J'ai apparament upgrade ctf, web et other. Je ne m'en souvient pas, mais je pense que c'est à des 2g de ram shared cpu. Probablement que William et moi avont rencontrées des problèmes de ram sur les dockers et c'est probablement là que j'ai installé avec lui des certificats ssl sur ctf. Les web et other n'ont pas eu droit a des certificats vu que ça compliquerait quelques challenges qui utilisent burpsuite.
 	</p>
-	<p>Le 6 mai, j'ai reboot avec le UI de linode ctf à cause que quelqu'un a mal fait les règles iptables, et a lock out tout le monde. Heureusement un reboot à flush la cache et on a pu se reconnecter. Si jamais on avait un autre problème, linode offre une petite console directement reliée à la machine, j'aurais pu sauver la machine par là. Jusqu'à présent, je ne pense pas avoir upgrade les machines, juste les reboot et changé le nom ou bref, A CHANGER ET À RELIRE CE QU'IL Y AVAIT AVANT. DE BASE, TOUT À 1g shared.
+	<p>Le 6 mai, j'ai reboot avec le UI de linode ctf à cause que quelqu'un a mal fait les règles iptables, et a lock out tout le monde. Heureusement un reboot à flush la cache et on a pu se reconnecter. Si jamais on avait un autre problème, linode offre une petite console directement reliée à la machine, j'aurais pu sauver la machine par là. Jusqu'à présent, je ne pense pas avoir upgrade les machines, juste les reboot et changé le nom ou bref, A CHANGER ET À RELIRE CE QU'IL Y AVAIT AVANT. DE BASE, TOUT À 1g shared. et 25g de stockage
 	</p>
 	<p>Le 5 mai, web a été reboot, mais je pense qu'on s'en fou.
 	</p>
-	<p>Le 8 mai, on a upgrade le other à 8g de ram shared cpu. William s'est occupé de déployer les challenges que tout le monde a mis sur le github.
+	<p>Le 8 mai, on a upgrade le other à 8g de ram shared cpu. William s'est occupé de déployer les challenges que tout le monde a mis sur le github et avait besoin de plus de ram, apparament 1 Gb n'était pas assez.
 	</p>
 	<br>
-	<p>J'ai ensuite généré des logs avec ce fichier (<a href="/assets/blog/linux/compression/py.py">py.py</a>) qui fait 2,042,753,003, le tar.gz me l'a descendu a 158,772,917 et le zpaq l'a descendu a 74,310,492 ce qui est beaucoup mieux. Pour le temps, tar.gz me donne 24.908s et zpaq me prend 20m2.780s. Beaucoup plus de temps, mais si le temps n'est pas une contrainte, allez avec zpaq. Si ce l'est, tar.gz fait un assez bon travail.
+	<p>Le matin de la compétition, j'ai upgrade les machines à des 64 Gb de ram dedicated. C'est overkill, mais continuez à lire. En vrai, j'ai upgrade web un peu la veille, de mémoire à 4 Gb. Ça en prend du temps pour qu'une machine dans le cloud s'upgrade, près de 10 minutes max, 5 minutes de moyenne, et comme je suis intelligent, j'ai fais le tout en série, plutôt qu'en parallèles, donc 15 minutes de gaspillées. Un peu plus que ça, à cause du boot qui prend une minute, du shutdown de même et ainsi de suite. Je pense tout de même que c'est l'une des meilleurs manières de gérer le tout ce que j'ai fait.
 	</p>
 	<br>
-	<p>Je tiens à rajouter que, pour un autre test dont je n'ai pas les mesures, la ram pour zpaq était proche de 3.6 Gb alors que celle de tar.gz était à 1.6 Mb.
+	<p>J'ai monitoré un peu les machines avec btop (lien en bas) tout au long de la compétition, et je dois avouer qu'on aurait pu faire les choses autrement. On avait, sur 32 coeurs, 1 coeur d'utilisé à 10%. Pour ctf et web, c'était pas mal assez ça tout le long de la compétition, mais on à eu un soucis au milieu, ctf ne répondait plus aux pings. J'ai du la reboot manuellement de l'interface de linode. Heureusement que William avait rajouté le flag A REVERIFIER AVEC LUI "restart unless stopped", ça nous a sauvé tellement de temps pendant le ctf, avant et juste en général. On était proche de 2 Gb de ram, et 8 Gb de ssd, on était bien. Pour le networking, je ne pense pas qu'on a atteint près de 100 Gb de transfer, mais on va revenir sur other et ce point plus tard.
 	</p>
 	<br>
-	<p>TLDR: zpaq est vraiment fort, des ordres de grandeur, mais est aussi lent, des ordres de grandeur si on le compare à gzip.
+	<p>Le plus gros pépin qu'on a rencontrés, c'est other que quelques participants ont qualifiés de DDoS, mais que je change pour "un essai cute de DDoS une machine beaucoup trop bien". La moitié des coeurs, à vu d'oeuil, étaient à 100% d'utilisation, la ram était bien, pas trop au dessus de 2 Gb, mais il y avait des process python nommées main.py, qui auraient pu être tellement de challenges, qui hug des coeurs. (Si quelqu'un veut éplucher les logs, je vais garder quasiment tout et avec suffisament d'autorité, je peux vous les donner.) Des process qui restent sur un coeur plusieurs secondes, à le faire rouler à 100%, clairement intentionnellement. Sur le moment, je n'en ai rien pensé, mais je dois avouer que maintenant, c'est clairement pas une attaque d'un outil automatisé. Il y avait 200 mb/s d'upload et 20 kb/s de download du point de vue de other.
 	</p>
 	<br>
-	<p>Fichier random:	3.145 Gb</p>
-	<p>tar.gz		3.146 Gb, 48 min</p>
-	<p>zpaq			3.147 Gb, 1 min 23</p>
+	<p>Après la compétition, j'ai laissé ctf en ligne pour que les autres admin puissent vérifier si il y a eu des erreurs avec les points, genre un challenge était en ORTHOGRAPHE logaritme plutôt que linéaire, et ainsi de suite. Les deux autres machines, je les ai resize à des 2 Gb de ram shared, après avoir ORTHOGRAPHE arrêté les docker, et je me suis rendu compte à quel point je regrette d'avoir utilisé le ssd. On a l'option, quand on upgrade une machine, de ne pas toucher au ssd, ou de l'agrandire pour utiliser tout ce qu'on peut, genre 1 Tb. Ça a pris tellement de temps pour pouvoir resize le disque, j'en avais marre, je ne vais plus accepter de le resize automatiquement. Surtout qu'on utilisaient 8 Gb en moyenne par machine, et que de base, le minimum fournit c'est 25 Gb, je ne vais plus faire cette erreure. Sauf si on a des challenge qui on en besoin dans le futur.
+	</p>
 	<br>
-	<p>Fichier vide:	3.3 Gb</p>
-	<p>tar.gz		3.2 Mb, 16s</p>
-	<p>zpaq			1 Kb, 16s</p>
+	<p>J'ai resize ctf après, un peu trop tôt vu que le ORTHOGRAPHE scoreboard n'a pas été screenshot par qulqu'un, on a eu un petit 5 à 10 minutes de downtime, sans pouvoir reconfirmer les points. J'ai quand même pas fait ça avant l'annonce des ORTHOGRAPHE gagants et le top 3 et ainsi de suite. Je vais laisser les machines up pendant encore 2-3 jours après l'évenement, avec ctfd ouvert si quelqu'un veut revoir ses challenges. Je vais rsync tous les fichers que je peux et laisser le tout pourrir un peu sur ma machine avant de le passer a mon soit disant NAS. Si jamais j'ai besoin de l'historique bash ou quoi que ce soit comme ça, je peux avec quelques ORTHOGRAPHE clics, ou plutôt quelques commandes.
+	</p>
 	<br>
-	<p>Fichier log:		2 Gb</p>
-	<p>tar.gz		158 Mb, 24s</p>
-	<p>zpaq			74 Mb, 20 min</p>
 	<br>
-	<p><small><a href="/assets/blog/linux/compression/fichier-size.txt">Ficher de taille</a></small></p>
-	<p><small><a href="/assets/blog/linux/compression/fichier-time.txt">Fichier de temps</a></small></p>
-	<p><small><a href="/assets/blog/linux/compression/py.py">Script pour les logs</a></small></p>
-	<p>Sources: <a href="https://www.mattmahoney.net/dc/zpaq.html">https://www.mattmahoney.net/dc/zpaq.html</a></p>
 	<br>
-	<p>27 Nov 2024</p>
+	<p><small><a href="URL">NOM</a></small></p>
+	<p>Sources: <a href="URL">NOM</a></p>
+	<br>
+	<p>11-12 Mai 2025</p>
 
 	</div>
 
