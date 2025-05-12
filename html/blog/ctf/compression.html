@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>M'hamed</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="/style.css">
+		<link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+<body>
+	<h1>Blog - CTF - BdeB H25</h1>
+
+	<div>
+	
+	<h2>CTF BdeB H25</h2>
+
+	<br>
+	<p>Bien le bonjour à vous, chers lecteurs. Voici une petite rétrospection sur le ctf de Bois-de-Boulogne du 10 Mai 2025. J'étais responsable de l'infrastructure avec quelques autres gars, et je ne vais pas tout dire, vu quelques erreurs qui pourraient être nuisibles à autrui.
+	</p>
+	<br>
+	<p>Le 24 avril, j'ai créé une machine, nommée ctf.akashic-record.xyz et on va la nommer ctf. J'ai aussitôt donné les accèes root à toute l'équipe des challenge dev sur discord. Un mot de passe simple, super long, mais très facile à s'en souvenir. William, l'une des personnes à avoir travaillé le plus sur l'infra m'a demandé d'installer docker, et d'autres petits trucs. Il c'est occupé d'installer l'instance ctfd (lien en bas) et quelques clées ssh.
+	</p>
+	<br>
+	<p>Le premier mai, j'ai créé web.akashic-record.xyz et other.akashic-record.xyz et on va les nommer web et other. J'ai copié les clés ssh et j'ai installé ce qui devait être installé. Je vais continuer de mémoire, vu que je n'arrive pas à trouver des logs rapidement de ce que j'ai fais exactement.
+	</p>
+	<p>J'ai apparament upgrade ctf, web et other. Je ne m'en souvient pas, mais je pense que c'est à des 2g de ram shared cpu. Probablement que William et moi avont rencontrées des problèmes de ram sur les dockers et c'est probablement là que j'ai installé avec lui des certificats ssl sur ctf. Les web et other n'ont pas eu droit a des certificats vu que ça compliquerait quelques challenges qui utilisent burpsuite.
+	</p>
+	<p>Le 6 mai, j'ai reboot avec le UI de linode ctf à cause que quelqu'un a mal fait les règles iptables, et a lock out tout le monde. Heureusement un reboot à flush la cache et on a pu se reconnecter. Si jamais on avait un autre problème, linode offre une petite console directement reliée à la machine, j'aurais pu sauver la machine par là. Jusqu'à présent, je ne pense pas avoir upgrade les machines, juste les reboot et changé le nom ou bref, A CHANGER ET À RELIRE CE QU'IL Y AVAIT AVANT. DE BASE, TOUT À 1g shared.
+	</p>
+	<p>Le 5 mai, web a été reboot, mais je pense qu'on s'en fou.
+	</p>
+	<p>Le 8 mai, on a upgrade le other à 8g de ram shared cpu. William s'est occupé de déployer les challenges que tout le monde a mis sur le github.
+	</p>
+	<br>
+	<p>J'ai ensuite généré des logs avec ce fichier (<a href="/assets/blog/linux/compression/py.py">py.py</a>) qui fait 2,042,753,003, le tar.gz me l'a descendu a 158,772,917 et le zpaq l'a descendu a 74,310,492 ce qui est beaucoup mieux. Pour le temps, tar.gz me donne 24.908s et zpaq me prend 20m2.780s. Beaucoup plus de temps, mais si le temps n'est pas une contrainte, allez avec zpaq. Si ce l'est, tar.gz fait un assez bon travail.
+	</p>
+	<br>
+	<p>Je tiens à rajouter que, pour un autre test dont je n'ai pas les mesures, la ram pour zpaq était proche de 3.6 Gb alors que celle de tar.gz était à 1.6 Mb.
+	</p>
+	<br>
+	<p>TLDR: zpaq est vraiment fort, des ordres de grandeur, mais est aussi lent, des ordres de grandeur si on le compare à gzip.
+	</p>
+	<br>
+	<p>Fichier random:	3.145 Gb</p>
+	<p>tar.gz		3.146 Gb, 48 min</p>
+	<p>zpaq			3.147 Gb, 1 min 23</p>
+	<br>
+	<p>Fichier vide:	3.3 Gb</p>
+	<p>tar.gz		3.2 Mb, 16s</p>
+	<p>zpaq			1 Kb, 16s</p>
+	<br>
+	<p>Fichier log:		2 Gb</p>
+	<p>tar.gz		158 Mb, 24s</p>
+	<p>zpaq			74 Mb, 20 min</p>
+	<br>
+	<p><small><a href="/assets/blog/linux/compression/fichier-size.txt">Ficher de taille</a></small></p>
+	<p><small><a href="/assets/blog/linux/compression/fichier-time.txt">Fichier de temps</a></small></p>
+	<p><small><a href="/assets/blog/linux/compression/py.py">Script pour les logs</a></small></p>
+	<p>Sources: <a href="https://www.mattmahoney.net/dc/zpaq.html">https://www.mattmahoney.net/dc/zpaq.html</a></p>
+	<br>
+	<p>27 Nov 2024</p>
+
+	</div>
+
+</body>
+</html>
+
