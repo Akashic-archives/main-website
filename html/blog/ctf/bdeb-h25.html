@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>M'hamed</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="/style.css">
+		<link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+<body>
+	<h1>Blog - CTF - BdeB H25</h1>
+
+	<div>
+	
+	<h2>CTF BdeB H25</h2>
+
+	<br>
+	<p>Bien le bonjour à vous, chers lecteurs. Voici une petite rétrospection sur le ctf de Bois-de-Boulogne du 10 Mai 2025. J'étais responsable de l'infrastructure avec quelques autres gars, et je ne vais pas tout dire, vu quelques erreurs qui pourraient être nuisibles à autrui.
+	</p>
+	<br>
+	<p>Le 24 avril, j'ai créé une machine, nommée ctf.akashic-record.xyz et on va la nommer ctf. J'ai aussitôt donné les accèes root à toute l'équipe des challenge dev sur discord. Un mot de passe simple, super long, mais très facile à s'en souvenir. Je suis obligé d'admettre que c'est pas la meilleur manière de gérer les mot de passes, surtout pour une compétition de cybersécurité, mais vu que ce n'est pas important et critique comme un gouvernement ou quelque chose qui contient une vie en jeu, je ne pense pas que ça va déranger. William, l'une des personnes à avoir travaillé le plus sur l'infra m'a demandé d'installer docker, et d'autres petits trucs. Il c'est occupé d'installer l'instance ctfd (lien en bas) et quelques clées ssh. Je préfère noter maintenant que quasiment tout c'est fait avec docker.
+	</p>
+	<br>
+	<p>Le premier mai, j'ai créé web.akashic-record.xyz et other.akashic-record.xyz et on va les nommer web et other. J'ai copié les clés ssh et j'ai installé ce qui devait être installé. Je vais continuer de mémoire, vu que je n'arrive pas à trouver des logs rapidement de ce que j'ai fais exactement.
+	</p>
+	<p>J'ai installé avec William des certificats ssl sur ctf. C'était surtout destiné à l'instance ctfd. Les web et other n'ont pas eu droit a des certificats vu que ça compliquerait quelques challenges qui utilisent burpsuite.
+	</p>
+	<p>Le 6 mai, j'ai reboot avec le UI de linode ctf à cause que quelqu'un a mal fait les règles iptables, et a lock out tout le monde. Heureusement un reboot à flush la cache et on a pu se reconnecter. Si jamais on avait un autre problème, linode offre une petite console directement reliée à la machine, j'aurais pu sauver la machine par là.
+	</p>
+	<p>Les specs de base de la machine nommée nanode 1Gb à 1 Gb de ram, 25 Gb de ssd, 1 CPU core, 40Gb/s de network in, 1Gb/s de network out et 1 Tb de transfer par mois.
+	</p>
+	<p>Les specs pour l'upgrade finale sont de 64 Gb de ram, 1280 Gb de ssd, 32 CPU cores, 40GB/s network in, 8Gb/s network out et 8 Tb de transfer par mois.
+	</p>
+	<p>Le 5 mai, web a été reboot, mais je pense qu'on s'en fou.
+	</p>
+	<p>Le 8 mai, on a upgrade le other à 8g de ram shared cpu. William s'est occupé de déployer les challenges que tout le monde a mis sur le github et avait besoin de plus de ram, apparament 1 Gb n'était pas assez.
+	</p>
+	<br>
+	<p>Le matin de la compétition, j'ai upgrade les machines à des 64 Gb de ram dedicated. C'est overkill, mais continuez à lire. En vrai, j'ai upgrade web un peu la veille, de mémoire à 4 Gb. Ça en prend du temps pour qu'une machine dans le cloud s'upgrade, près de 10 minutes max, 5 minutes de moyenne, et comme je suis intelligent, j'ai fais le tout en série, plutôt qu'en parallèles, donc 15 minutes de gaspillées. Un peu plus que ça, à cause du boot qui prend une minute, du shutdown de même et ainsi de suite. Je pense tout de même que c'est l'une des meilleurs manières de gérer le tout ce que j'ai fait.
+	</p>
+	<br>
+	<p>J'ai monitoré un peu les machines avec btop tout au long de la compétition, et je dois avouer qu'on aurait pu faire les choses autrement. On avait, sur 32 coeurs, 1 coeur d'utilisé à 10%. Pour ctf et web, c'était pas mal assez ça tout le long de la compétition, mais on à eu un soucis au milieu, ctf ne répondait plus aux pings. J'ai du la reboot manuellement de l'interface de linode. Heureusement que William avait rajouté le flag "--restart unless-stopped", ça nous a sauvé tellement de temps pendant le ctf, avant et juste en général. On était proche de 2 Gb de ram, et 8 Gb de ssd, on était bien. Pour le networking, je ne pense pas qu'on a atteint près de 100 Gb de transfer, mais on va revenir sur other et ce point plus tard.
+	</p>
+	<br>
+	<p>Le plus gros pépin qu'on a rencontrés, c'est other que quelques participants ont qualifiés de DDoS, mais que je change pour "un essai cute de DDoS une machine beaucoup trop bien". La moitié des coeurs, à vu d'oeuil, étaient à 100% d'utilisation, la ram était bien, pas trop au dessus de 2 Gb, mais il y avait des process python nommées main.py, qui auraient pu être tellement de challenges, qui hug des coeurs. (Si quelqu'un veut éplucher les logs, je vais garder quasiment tout et avec suffisament d'autorité, je peux vous les donner.) Des process qui restent sur un coeur plusieurs secondes, à le faire rouler à 100%, clairement intentionnellement. Sur le moment, je n'en ai rien pensé, mais je dois avouer que maintenant, c'est clairement pas une attaque d'un outil automatisé. Il y avait entre 2 et 200 mb/s d'upload et 20 kb/s de download du point de vue de other.
+	</p>
+	<br>
+	<p>Après la compétition, j'ai laissé ctf en ligne pour que les autres admin puissent vérifier si il y a eu des erreurs avec les points, genre un challenge était en logarithmes plutôt que linéaire, et ainsi de suite. Les deux autres machines, je les ai resize à des 2 Gb de ram shared, après avoir arrêté les docker, et je me suis rendu compte à quel point je regrette d'avoir utilisé le ssd. On a l'option, quand on upgrade une machine, de ne pas toucher au ssd, ou de l'agrandire pour utiliser tout ce qu'on peut, genre 1 Tb. Ça a pris tellement de temps pour pouvoir resize le disque, j'en avais marre, je ne vais plus accepter de le resize automatiquement. Surtout qu'on utilisaient 8 Gb en moyenne par machine, et que de base, le minimum fournit c'est 25 Gb, je ne vais plus faire cette erreure. Sauf si on a des challenge qui on en besoin dans le futur.
+	</p>
+	<br>
+	<p>J'ai resize ctf après, un peu trop tôt vu que le scoreboard n'a pas été sauvegardé par qulqu'un, on a eu un petit 5 à 10 minutes de downtime, sans pouvoir reconfirmer les points. J'ai quand même pas fait ça avant l'annonce des gagnants et le top 3 et ainsi de suite. Je vais laisser les machines up pendant encore 2-3 jours après l'évenement, avec ctfd ouvert si quelqu'un veut revoir ses challenges. Je vais rsync tous les fichers que je peux et laisser le tout pourrir un peu sur ma machine avant de le passer a mon soit disant NAS. Donc une backup de quasiement tous les fichiers qui arrive proche de 10 Gb au total est disponible sur demande.
+	</p>
+	<br>
+	<p>J'ai aussi utilisé deux DNS, un pour un challenge et un pour les machines, j'aurais pu en utiliser un seul, mais je pense que un c'est un minimum. Ce serait extremenent dur et chiant de faire un ctf sans DNS pour les machines non seulement du point de vu d'un admin ou d'un challenge dev, mais aussi du point de vu d'un participant.
+	</p>
+	<br>
+	<p>Je vais quand même mentionner que j'ai gérer le challenge avec les cadenas, le lockpicking, et le challenge wifi.
+	</p>
+	<br>
+	<p>Si c'était à refaire, je ne pense pas changer quoi que ce soit, vu la résistance aux DDoS et la résiliance du systeme à l'utilisation générale.
+	</p>
+	<br>
+	<br>
+	<br>
+	<p><small><a href="https://ctfd.io/">CTFd</a></small></p>
+	<br>
+	<p>11-13 Mai 2025</p>
+
+	</div>
+
+</body>
+</html>
+
