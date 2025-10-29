@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>M'hamed</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="/style.css">
+		<link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+<body>
+	<h1>Blog - Linux - vpn</h1>
+
+	<div>
+	
+	<h2>vpn</h2>
+
+	<br>
+	<p>J'avais besoin d'un vpn pour torrent mes iso linux et autres, vu que j'ai changé d'ISP récamment, et que j'ai entendu qu'ils envoient des lettres aux personnes qui utilisent torrent. J'ai décidé d'utiliser un de mes serveurs pour faire un petit vpn et apprendre quelques trucs dessus.</p>
+	<br>
+	<br>
+	<p>J'ai utilisé le site de wireguard pour apprendre plus sur le vpn et comment l'installer, et j'ai commencé. Il faut bien évidamment l'installer, avec par exemple pour debian, sudo apt install wireguard.</p>
+	<br>
+	<br>
+	<p>Pour générer les clées de chaque côté: "wg genkey | tee server.key | wg pubkey &gt; server.pub". On aura deux fichiers, le .pub est publique, le .key doit rester priver. On conseil aussi de mettre les permissions avec umask 077, mais voilà.</p>
+	<br>
+	<br>
+	<p>Ensuite, il faut remplir le fichier /etc/wireguard/wg0.conf j'ai choisi arbitrairement le wg0 pour l'interface, vous pouvez choisir quoi que ce soit. Le contenu devait être pour le serveur, moins les autres clients si vous voulez plusieurs clients sur le vpn:</p>
+	<p>[Interface]</p>
+	<p>Address = 10.0.0.1/24 ou quelque chose comme ça.</p>
+	<p>ListenPort = un port, j'ai choisi un entre 50'000 et 60'000.</p>
+	<p>PrivateKey = contenu du server.key.</p>
+	<br>
+	<p>[Peer]</p>
+	<p>PublicKey = contenu du client1.pub</p>
+	<p>AllowedIPs = 10.0.0.2/32 et pour chaque client choisir une adresse is valide.</p>
+	<br>
+	<br>
+	<p>Pour le client, c'est quasiment la même chose:</p>
+	<p>[Interface]</p>
+	<p>Address = 10.0.0.2/24 la même chose que dans server</p>
+	<p>PrivateKey = contenu du client1.key.</p>
+	<br>
+	<p>[Peer]</p>
+	<p>PublicKey = contenu du server.pub</p>
+	<p>Endpoint = l'ip du server:le port choisi</p>
+	<p>AllowedIPs = 0.0.0.0/0, ::0 si on veut passer tout le traffic, comme un vpn dans les pubs</p>
+	<p>PersistentKeepalive = 25</p>
+	<br>
+	<br>
+	<p>Pour le serveur, on va modifier le fichier /etc/sysctl.conf pour uncomment net.ipv4.ip_forward=1 et on va sudo sysctl -p pour appliquer le changement. J'ai eu des problèmes avec ça, donc bonne chance.</p>
+	<br>
+	<br>
+	<p>On va aussi, partout, sudo wg-quick up wg0 pour pouvoir activer l'interface. sudo wg permet de voir des statistiques pour le debuggage et juste pour le fun.</p>
+	<br>
+	<br>
+	<p>Une de ses commandes va créer un nat du côté du serveur, on peut pour l'instant ping, mais on ne peut pas accéder à internet, ce qui est mon objectif primaire.</p>
+	<p>sudo iptables -t nat -A POSTROUTING -s 10.8.8.0/24 -o eth0 -j MASQUERADE</p>
+	<p>sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERAD</p>
+	<br>
+	<br>
+	<p>Je vous conseil tout de même d'aller voir ça par vous mêmes.</p>
+	<br>
+	<br>
+	<br>
+	<p>Sources: <a href="https://www.wireguard.com/">https://www.wireguard.com/</a></p>
+	<br>
+	<p>29 Oct 2025</p>
+	</div>
+</body>
+</html>
+
