@@ -1,0 +1,33 @@
+
+a rajouter le template
+
+j'ai achete un nouveau hdd, voici les commandes utilisees.
+
+sudo smartctl -t short /dev/sda
+sudo smartctl -t long /dev/sda
+sudo smartctl -a /dev/sda
+sudo dd if=/dev/zero of=/dev/sdabs=1M status=progress
+sudo smartctl -t short /dev/sda
+sudo smartctl -a /dev/sda
+
+sudo parted /dev/sda mklabel gpt
+sudo parted /dev/sda mkpart primary btrfs 0% 100%
+sudo cryptsetup luksFormat /dev/sda1
+sudo cryptsetup open /dev/sda1 name
+sudo mkfs.btrfs -L btrfsName /dev/mapper/name
+
+sudo mkdir -p /mnt/name
+#sudo cryptsetup open /dev/sda1 name
+sudo mount -o compress=zstd /dev/mapper/name /mnt/name
+rsync -auHh --checksum --info=progress2
+
+sudo btrfs scrub start .
+sudo btrfs scrub status .
+
+sudo apt install btrfs-progs -y
+
+defrag mais toujours pas la
+
+
+
+
